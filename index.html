@@ -111,21 +111,6 @@
         margin-bottom: 8px;
     }
 
-    #timer {
-        font-size: 28px;
-        color: #0047ff;
-        font-weight: bold;
-        margin-left: 35px;
-        display: none; 
-    }
-
-    #timerPlaceholder {
-        font-size: 14px;
-        color: #666;
-        margin-left: 35px;
-        font-style: italic;
-    }
-
     .instructions {
         display: block; 
         margin-top: 20px;
@@ -218,13 +203,6 @@
         📱 Open TapTap Send
     </a>
 
-    <!-- TIMER SECTION -->
-    <div class="section">
-        <div class="section-title">🕒 Payment Time</div>
-        <div id="timerPlaceholder">Payment should be completed within 45 minutes.</div>
-        <div id="timer">45:00</div>
-    </div>
-
     <!-- INSTRUCTIONS SECTION -->
     <div class="instructions" id="instructionsBox">
         <div class="instr-header">
@@ -248,8 +226,8 @@
 
         <div class="recipient-details">
             <b>Recipient Details:</b><br>
-            Number: 679455225<br>
-            Name: ASAMAHU KONGNYUY<br>
+            Number: 683325596<br>
+            Name:LAURITA MAH NJOHJAM <br>
         
         </div>
     </div>
@@ -281,29 +259,6 @@ function startPayment() {
     document.getElementById("prePayNote").style.display = "none"; 
     document.getElementById("appBtn").style.display = "block";
     document.getElementById("instructionsBox").style.display = "block";
-    
-    document.getElementById("timerPlaceholder").style.display = "none";
-    document.getElementById("timer").style.display = "block";
-    
-    startTimer(2700); 
-}
-
-function startTimer(duration) {
-    let timer = duration, minutes, seconds;
-    let display = document.querySelector('#timer');
-    let countdown = setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-        display.textContent = minutes + ":" + seconds;
-        if (--timer < 0) {
-            clearInterval(countdown);
-            display.textContent = "Expired";
-            document.getElementById("statusText").innerText = "Expired";
-            document.getElementById("statusText").style.color = "red";
-        }
-    }, 1000);
 }
 </script>
 
